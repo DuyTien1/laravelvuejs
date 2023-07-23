@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAuthorDetailsTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateAuthorDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('author_details', function (Blueprint $table) {
-            $table->id('id')->primary_key();
-            // $table->integer("author_id");
-            // $table->integer("user_id");
+        Schema::create('roles', function (Blueprint $table) {
+            $table->id();
+            $table->string('role_name')->unique();
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateAuthorDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('author_details');
+        Schema::dropIfExists('roles');
     }
 }

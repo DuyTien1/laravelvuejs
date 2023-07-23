@@ -4,11 +4,11 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Category;
-use App\Http\Resources\CategoryResource;
-use App\Http\Resources\CategoryCollection;
+use App\Models\Role;
+use App\Http\Resources\RoleResource;
+use App\Http\Resources\RoleCollection;
 
-class CategoryController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return new CategoryCollection(Category::paginate(5));
+        return new RoleCollection(Role::all());
     }
 
     /**
@@ -40,36 +40,34 @@ class CategoryController extends Controller
     {
         $request->validate(
             [
-                'category_name' => 'required',
-                'describe' => 'required'
+                'role_name' => 'required'
             ],
             [
-                'categoryname.required' => 'Tên danh mục không được bỏ trống.',
-                'describe.required' => 'Mô tả không được bỏ trống.'
+                'role_name.required' => 'Tên vai trò không được bỏ trống.'
             ]
         );
-        $category = Category::create($request->all());
-        return new CategoryResource($category);
+        $role = Role::create($request->all());
+        return new RoleResource($role);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(Role $role)
     {
-        return new CategoryResource($category);
+        return new RoleResource($role);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Role $role)
     {
         //
     }
@@ -78,23 +76,23 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Role $role)
     {
-        $category->update($request->all());
-        return new CategoryResource($category);
+        $role->update($request->all());
+        return new RoleResource($role);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Role $role)
     {
-        Category::destroy($category->id);
+        Role::destroy($role->id);
     }
 }

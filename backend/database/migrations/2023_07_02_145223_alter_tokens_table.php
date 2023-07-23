@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAuthorDetailsTable extends Migration
+class AlterTokensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateAuthorDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('author_details', function (Blueprint $table) {
-            $table->id('id')->primary_key();
-            // $table->integer("author_id");
-            // $table->integer("user_id");
-            $table->timestamps();
+        Schema::table('tokens', function (Blueprint $table) {
+            $table->foreignId('user_id')->constrained('users');
         });
     }
 
@@ -28,6 +25,6 @@ class CreateAuthorDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('author_details');
+        //
     }
 }

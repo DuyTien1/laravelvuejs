@@ -25,6 +25,7 @@ Route::get('/', function () {
 Route::post('login', 'LoginController@login');
 Route::namespace('api')->group(function() {
     Route::apiResource('user', 'UserController')->except('create', 'edit');
+    Route::apiResource('role', 'RoleController')->except('create', 'edit');
     Route::apiResource('story', 'StoryController')->except('create', 'edit');
     Route::apiResource('category', 'CategoryController')->except('create', 'edit');
     Route::apiResource('categorydetail', 'CategoryDetailController')->except('create', 'edit');

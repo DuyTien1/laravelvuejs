@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\User;
-use App\Models\Author;
+// use App\Models\User;
+// use App\Models\Author;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,8 +15,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(10)->create();
-        Author::factory(10)->create();
-        // $this->call(nguoidung::class);
+        // User::factory(10)->create();
+        // Author::factory(10)->create();
+        $this->call([
+            RoleSeeder::class,
+            UserSeeder::class
+        ]);
+
     }
 }

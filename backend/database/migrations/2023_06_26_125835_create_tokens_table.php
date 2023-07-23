@@ -14,8 +14,8 @@ class CreateTokensTable extends Migration
     public function up()
     {
         Schema::create('tokens', function (Blueprint $table) {
-            $table->bigIncrements('id')->primary_key();
-            $table->bigInteger('user_id');
+            $table->id('id')->primary_key();
+            // $table->bigInteger('user_id');
             $table->string('token')->unique();
             $table->string('token_refresh')->unique();
             $table->datetime('token_expried');

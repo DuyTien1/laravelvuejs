@@ -15,9 +15,9 @@ class CreateStoriesTable extends Migration
     {
         Schema::create('stories', function (Blueprint $table) {
             $table->bigIncrements('id')->primary_key();
-            $table->integer('author_id');
-            $table->string('storyname');
-            $table->string('authorname');
+            // $table->integer('author_id');
+            $table->string('story_name');
+            $table->string('author_name');
             $table->biginteger('view')->default(0);
             $table->longtext('describe');
             $table->integer('status')->default(0);

@@ -14,9 +14,9 @@ class CreateCategoryDetailsTable extends Migration
     public function up()
     {
         Schema::create('category_details', function (Blueprint $table) {
-            $table->bigIncrements('id')->primary_key();
-            $table->integer("category_id");
-            $table->integer("story_id");
+            $table->id('id')->primary_key();
+            // $table->integer("category_id");
+            // $table->integer("story_id");
             $table->timestamps();
         });
     }

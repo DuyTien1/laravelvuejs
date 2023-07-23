@@ -40,11 +40,11 @@ class AuthorController extends Controller
     {
         $request->validate(
             [
-                'authorname' => 'required',
+                'author_name' => 'required',
                 'describe' => 'required',
             ],
             [
-                'authorname.required' => 'Tên người đăng không được bỏ trống.',
+                'author_name.required' => 'Tên người đăng không được bỏ trống.',
                 'describe.required' => 'Mô tả không được bỏ trống.',
             ]
         );
