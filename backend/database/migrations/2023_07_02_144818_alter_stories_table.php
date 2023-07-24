@@ -14,7 +14,7 @@ class AlterStoriesTable extends Migration
     public function up()
     {
         Schema::table('stories', function (Blueprint $table) {
-            $table->foreignId('author_id')->constrained('authors');
+            $table->foreignId('user_id')->constrained('users');
         });
     }
 

@@ -29,8 +29,6 @@ Route::namespace('api')->group(function() {
     Route::apiResource('story', 'StoryController')->except('create', 'edit');
     Route::apiResource('category', 'CategoryController')->except('create', 'edit');
     Route::apiResource('categorydetail', 'CategoryDetailController')->except('create', 'edit');
-    Route::apiResource('author', 'AuthorController')->except('create', 'edit');
-    Route::apiResource('authordetail', 'AuthorDetailController')->except('create', 'edit');
     Route::apiResource('chapter', 'ChapterController')->except('create', 'edit');
     Route::apiResource('comment', 'CommentController')->except('create', 'edit');
 });
