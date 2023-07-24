@@ -11,9 +11,8 @@
                             </label>
                         </div>
                         <div class="col-12 col-sm-8">
-                            <div>
-                                <ckeditor :editor="editor" :value="role_name" v-model="role_name" :config="editorConfig"></ckeditor>
-                            </div>
+                            <a-input placeholder="Tên Vai Trò" allow-clear v-model:value="role_name"
+                                :class="{ 'input-danger': errors.role_name }" />
                             <div class="w-100"></div>
                             <small v-if="errors.role_name" class="text-danger">{{ errors.role_name[0] }}</small>
                         </div>
@@ -78,16 +77,7 @@ export default defineComponent({
             filterOption,
             createRoles,
             ...toRefs(roles),
-            errors,
-            editor: ClassicEditor,
-            editorConfig: {
-                toolbar: ['bold', 'italic', 'underline', 'strikethrough', 'subscript', 'superscript', '|', 'headings', '|', 'undo', 'redo'],
-                heading: {
-                    options: [
-                        { model: 'normal', view: 'span', title: 'normal' }
-                    ]
-                }
-            }
+            errors
         }
     }
 });

@@ -1,21 +1,20 @@
 <template>
-    <form @submit.prevent="createUsers()">
-        <a-card title="Tạo Mới Tài Khoản" style="width: 100%; text-align: center;">
-            <div class="row">
-                <div class="col-12 col-sm-4">
-                    <div class="row">
-                        <div class="col-sm-12 d-flex justify-content-center mb-3">
-                            <a-avatar shape="square" :size="200">
-                                <template #icon>
-                                    <img src="../../../assets/avatar.png" alt="error">
-                                </template>
-                            </a-avatar>
+    <form @submit.prevent="createStories()">
+        <a-card title="Tạo Mới Tác Giả" style="width: 100%; text-align: center;">
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 col-sm-8">
+                    <div class="row mb-3">
+                        <div class="col-12 col-sm-3 text-start text-sm-end">
+                            <label>
+                                <span class="text-danger me-1">*</span>
+                                <span :class="{ 'text-danger': errors.story_name }">Tên Truyện: </span>
+                            </label>
                         </div>
-                        <div class="col-sm-12 d-flex justify-content-center">
-                            <a-button type="primary">
-                                <i class="fa-solid fa-plus me-2"></i>
-                                <span>Chọn Ảnh Đại Diện</span>
-                            </a-button>
+                        <div class="col-12 col-sm-8">
+                            <a-input placeholder="Tên Vai Trò" allow-clear v-model:value="story_name"
+                                :class="{ 'input-danger': errors.story_name }" />
+                            <div class="w-100"></div>
+                            <small v-if="errors.story_name" class="text-danger">{{ errors.story_name[0] }}</small>
                         </div>
                     </div>
                 </div>
@@ -24,96 +23,65 @@
                         <div class="col-12 col-sm-3 text-start text-sm-end">
                             <label>
                                 <span class="text-danger me-1">*</span>
-                                <span :class="{ 'text-danger': errors.role_id }">Vai Trò: </span>
+                                <span :class="{ 'text-danger': errors.author_name }">Tên Tác Giả: </span>
                             </label>
                         </div>
-                        <div class="col-12 col-sm-5">
-                            <a-select show-search placeholder="Vai Trò" style="width: 100%; text-align: start;"
-                                :options="roles" :filter-option="filterOption" v-model:value="role_id"
-                                :class="{ 'select-danger': errors.role_id }">
+                        <div class="col-12 col-sm-8">
+                            <a-input placeholder="Tên Vai Trò" allow-clear v-model:value="author_name"
+                                :class="{ 'input-danger': errors.author_name }" />
+                            <div class="w-100"></div>
+                            <small v-if="errors.author_name" class="text-danger">{{ errors.author_name[0] }}</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-8">
+                    <div class="row mb-3">
+                        <div class="col-12 col-sm-3 text-start text-sm-end">
+                            <label>
+                                <span class="text-danger me-1">*</span>
+                                <span :class="{ 'text-danger': errors.poster_name }">Tên Người Đăng: </span>
+                            </label>
+                        </div>
+                        <div class="col-12 col-sm-8">
+                            <a-select :field-names="{ label: 'author_name', value: 'id', options: 'authors' }" show-search
+                                placeholder="Người Đăng" style="width: 100%; text-align: start;" :options="authors"
+                                :filter-option="filterOption" v-model:value="author_id"
+                                :class="{ 'select-danger': errors.author_id }">
                             </a-select>
                             <div class="w-100"></div>
-                            <small v-if="errors.role_id" class="text-danger">{{ errors.role_id[0] }}</small>
+                            <small v-if="errors.poster_name" class="text-danger">{{ errors.poster_name[0] }}</small>
                         </div>
                     </div>
+                </div>
+                <div class="col-12 col-sm-8">
                     <div class="row mb-3">
                         <div class="col-12 col-sm-3 text-start text-sm-end">
                             <label>
                                 <span class="text-danger me-1">*</span>
-                                <span :class="{ 'text-danger': errors.username }">Tên Người Dùng: </span>
+                                <span :class="{ 'text-danger': errors.describe }">Giới Thiệu Truyện: </span>
                             </label>
                         </div>
-                        <div class="col-12 col-sm-5">
-                            <a-input placeholder="Tên Người Dùng" allow-clear v-model:value="username"
-                                :class="{ 'input-danger': errors.username }" />
+                        <div class="col-12 col-sm-8">
+                            <a-input placeholder="Tên Vai Trò" allow-clear v-model:value="describe"
+                                :class="{ 'input-danger': errors.describe }" />
                             <div class="w-100"></div>
-                            <small v-if="errors.username" class="text-danger">{{ errors.username[0] }}</small>
+                            <small v-if="errors.describe" class="text-danger">{{ errors.describe[0] }}</small>
                         </div>
                     </div>
+                </div>
+                <div class="col-12 col-sm-8">
                     <div class="row mb-3">
                         <div class="col-12 col-sm-3 text-start text-sm-end">
                             <label>
                                 <span class="text-danger me-1">*</span>
-                                <span :class="{ 'text-danger': errors.email }">Email: </span>
+                                <span :class="{ 'text-danger': errors.source }">Nguồn Truyện: </span>
                             </label>
                         </div>
-                        <div class="col-12 col-sm-5">
-                            <a-input type="email" placeholder="Email" allow-clear v-model:value="email" :class="{ 'input-danger': errors.email }"/>
+                        <div class="col-12 col-sm-8">
+                            <a-input placeholder="Tên Vai Trò" allow-clear v-model:value="source"
+                                :class="{ 'input-danger': errors.source }" />
                             <div class="w-100"></div>
-                            <small v-if="errors.email" class="text-danger">{{ errors.email[0] }}</small>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-12 col-sm-3 text-start text-sm-end">
-                            <label>
-                                <span class="text-danger me-1">*</span>
-                                <span :class="{ 'text-danger': errors.address }">Địa Chỉ: </span>
-                            </label>
-                        </div>
-                        <div class="col-12 col-sm-5">
-                            <a-input placeholder="Địa Chỉ" allow-clear v-model:value="address" :class="{ 'input-danger': errors.address }"/>
-                            <div class="w-100"></div>
-                            <small v-if="errors.address" class="text-danger">{{ errors.address[0] }}</small>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-12 col-sm-3 text-start text-sm-end">
-                            <label>
-                                <span class="text-danger me-1">*</span>
-                                <span :class="{ 'text-danger': errors.phone }">Số Điện Thoại: </span>
-                            </label>
-                        </div>
-                        <div class="col-12 col-sm-5">
-                            <a-input placeholder="Số Điện Thoại" allow-clear v-model:value="phone" :class="{ 'input-danger': errors.phone }"/>
-                            <div class="w-100"></div>
-                            <small v-if="errors.phone" class="text-danger">{{ errors.phone[0] }}</small>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-12 col-sm-3 text-start text-sm-end">
-                            <label>
-                                <span class="text-danger me-1">*</span>
-                                <span :class="{ 'text-danger': errors.password }">Mật Khẩu: </span>
-                            </label>
-                        </div>
-                        <div class="col-12 col-sm-5">
-                            <a-input-password placeholder="Mật Khẩu" allow-clear v-model:value="password" :class="{ 'input-danger': errors.password }"/>
-                            <div class="w-100"></div>
-                            <small v-if="errors.password" class="text-danger">{{ errors.password[0] }}</small>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-12 col-sm-3 text-start text-sm-end">
-                            <label>
-                                <span class="text-danger me-1">*</span>
-                                <span :class="{ 'text-danger': errors.password }">Xác Nhận Mật Khẩu: </span>
-                            </label>
-                        </div>
-                        <div class="col-12 col-sm-5">
-                            <a-input-password placeholder="Xác Nhận Mật Khẩu" allow-clear v-model:value="password_confirmation" :class="{ 'input-danger': errors.password }"/>
-                            <div class="w-100"></div>
-                            <small v-if="errors.password_confirmation" class="text-danger">{{
-                                errors.password_confirmation[0] }}</small>
+                            <small v-if="errors.source" class="text-danger">{{ errors.source[0] }}</small>
                         </div>
                     </div>
                 </div>
@@ -121,7 +89,7 @@
             <div class="row m-4">
                 <div class="col-12 d-grid d-sm-flex justify-content-sm-center mx-auto">
                     <a-button class="me-0 me-sm-2 mb-2 mb-sm-0">
-                        <router-link :to="{ name: 'admin-users' }">
+                        <router-link :to="{ name: 'admin-stories' }">
                             <span>Hủy</span>
                         </router-link>
                     </a-button>
@@ -143,64 +111,64 @@ import { message } from 'ant-design-vue';
 import { useMenu } from "../../../stores/use-menu.js"
 import { defineComponent, ref, reactive, toRefs } from "vue";
 import axios from "axios";
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export default defineComponent({
     setup() {
-        useMenu().onSelectedKeys(["admin-users"]);
-
+        useMenu().onSelectedKeys(["admin-stories"]);
         const routers = useRouter();
-        const roles = ref([]);
         const errors = ref([]);
-        const users = reactive({
-            username: '',
-            email: '',
-            password: '',
-            password_confirmation: '',
-            address: '',
-            phone: '',
-            role_id: []
+        const authors = ref([]);
+        const stories = reactive({
+            story_name: '',
+            author_name: '',
+            describe: '',
+            source: '',
+            author_id: '',
         });
 
-        const getRoles = () => {
-            axios.get("http://localhost:8000/api/role")
+        const filterOption = (input, option) => {
+            return option.author_name.toLowerCase().indexOf(input.toLowerCase()) >= 0;
+        };
+
+        const getAuthors = () => {
+            axios.get("http://localhost:8000/api/author")
                 .then((response) => {
-                    roles.value = response.data.data;
+                    if (response) {
+                        authors.value = response.data.data;
+                    }
                 })
                 .catch((error) => {
                     console.log(error);
                 });
         };
+        getAuthors();
 
-        const filterOption = (input, option) => {
-            return option.label.toLowerCase().indexOf(input.toLowerCase()) >= 0;
-        };
-
-        const createUsers = () => {
-            axios.post("http://localhost:8000/api/user", users)
+        const createStories = () => {
+            axios.post("http://localhost:8000/api/story", stories)
                 .then((response) => {
                     if (response) {
-                        message.success("Tạo Tài Khoản Mới Thành Công");
-                        routers.push( {name: "admin-users"} );
+                        message.success("Tạo tác Giả Mới Thành Công");
+                        routers.push({ name: "admin-stories" });
+                        // console.log(response);
                     }
                 })
                 .catch((error) => {
                     errors.value = error.response.data.errors;
+                    console.log(error);
                 });
         };
 
-        getRoles();
-
         return {
-            roles,
             filterOption,
-            createUsers,
-            ...toRefs(users),
-            errors
+            createStories,
+            ...toRefs(stories),
+            errors,
+            authors
         }
     }
 });
 </script>
-
 
 <style>
 .select-danger {
@@ -209,4 +177,5 @@ export default defineComponent({
 
 .input-danger {
     border-color: #ff0000;
-}</style>
+}
+</style>

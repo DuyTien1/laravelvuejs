@@ -17,7 +17,8 @@ class StoryController extends Controller
      */
     public function index()
     {
-        return new StoryCollection(Story::paginate(2));
+        $story = Story::join('authors', 'stories.author_id', '=', 'authors.id')->select('stories.*', 'authors.author_name as poster_name')->get();
+        return new StoryCollection($story);
     }
 
     /**
@@ -40,14 +41,14 @@ class StoryController extends Controller
     {
         $request->validate(
             [
-                'storyname' => 'required',
-                'storyname' => 'required',
+                'story_name' => 'required',
+                'author_name' => 'required',
                 'describe' => 'required',
                 'source' => 'required'
             ],
             [
-                'storyname.required' => 'Tên truyện không được bỏ trống.',
-                'storyname.required' => 'Tên tác giả không được bỏ trống.',
+                'story_name.required' => 'Tên truyện không được bỏ trống.',
+                'author_name.required' => 'Tên tác giả không được bỏ trống.',
                 'describe.required' => 'mô tả không được bỏ trống.',
                 'source.required' => 'Nguồn truyện không được bỏ trống.'
             ]
