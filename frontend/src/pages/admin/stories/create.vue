@@ -43,10 +43,10 @@
                             </label>
                         </div>
                         <div class="col-12 col-sm-8">
-                            <a-select :field-names="{ label: 'author_name', value: 'id', options: 'authors' }" show-search
-                                placeholder="Người Đăng" style="width: 100%; text-align: start;" :options="authors"
-                                :filter-option="filterOption" v-model:value="author_id"
-                                :class="{ 'select-danger': errors.author_id }">
+                            <a-select :field-names="{ label: 'username', value: 'id', options: 'users' }" show-search
+                                placeholder="Người Đăng" style="width: 100%; text-align: start;" :options="users"
+                                :filter-option="filterOption" v-model:value="user_id"
+                                :class="{ 'select-danger': errors.user_id }">
                             </a-select>
                             <div class="w-100"></div>
                             <small v-if="errors.poster_name" class="text-danger">{{ errors.poster_name[0] }}</small>
@@ -118,31 +118,31 @@ export default defineComponent({
         useMenu().onSelectedKeys(["admin-stories"]);
         const routers = useRouter();
         const errors = ref([]);
-        const authors = ref([]);
+        const users = ref([]);
         const stories = reactive({
             story_name: '',
             author_name: '',
             describe: '',
             source: '',
-            author_id: '',
+            user_id: '',
         });
 
         const filterOption = (input, option) => {
-            return option.author_name.toLowerCase().indexOf(input.toLowerCase()) >= 0;
+            return option.username.toLowerCase().indexOf(input.toLowerCase()) >= 0;
         };
 
-        const getAuthors = () => {
-            axios.get("http://localhost:8000/api/author")
+        const getUsers = () => {
+            axios.get("http://localhost:8000/api/user")
                 .then((response) => {
                     if (response) {
-                        authors.value = response.data.data;
+                        users.value = response.data.data;
                     }
                 })
                 .catch((error) => {
                     console.log(error);
                 });
         };
-        getAuthors();
+        getUsers();
 
         const createStories = () => {
             axios.post("http://localhost:8000/api/story", stories)
@@ -164,7 +164,7 @@ export default defineComponent({
             createStories,
             ...toRefs(stories),
             errors,
-            authors
+            users
         }
     }
 });

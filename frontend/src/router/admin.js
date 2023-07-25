@@ -3,25 +3,6 @@ const admin = [
         path: "/admin",
         component: () => import("../layouts/admin.vue"),
         children: [
-            //authors
-            {
-                path: "authors",
-                name: "admin-authors",
-                component: () => import("../pages/admin/authors/index.vue")
-            },
-            {
-                path: "authors/create",
-                name: "admin-authors-create",
-                component: () => import("../pages/admin/authors/create.vue")
-                
-            },
-            {
-                path: "authors/edit/:id",
-                name: "admin-authors-edit",
-                component: () => import("../pages/admin/authors/edit.vue")
-                
-            },
-
             //stories
             {
                 path: "stories",

@@ -9,7 +9,7 @@ class Story extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $fillable = ['author_id', 'story_name', 'author_name', 'describe', 'source'];
+    protected $fillable = ['user_id', 'story_name', 'author_name', 'describe', 'source'];
     protected $primaryKey = 'id';
     protected $table = 'stories';
 }

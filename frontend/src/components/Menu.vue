@@ -5,11 +5,6 @@
                 <span><i class="fa-solid fa-user"></i> Quản Lý Tài Khoản</span>
             </router-link>
         </a-menu-item>
-        <a-menu-item key="admin-authors">
-            <router-link :to="{ name: 'admin-authors' }">
-                <span><i class="fa-solid fa-user"></i> Quản Lý Tác Giả</span>
-            </router-link>
-        </a-menu-item>
         <a-menu-item key="admin-stories">
             <router-link :to="{ name: 'admin-stories' }">
                 <span><i class="fa-solid fa-user"></i> Quản Lý Truyện</span>
