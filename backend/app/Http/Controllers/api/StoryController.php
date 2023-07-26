@@ -17,7 +17,7 @@ class StoryController extends Controller
      */
     public function index()
     {
-        $story = Story::join('authors', 'stories.author_id', '=', 'authors.id')->select('stories.*', 'authors.author_name as poster_name')->get();
+        $story = Story::join('users', 'stories.user_id', '=', 'users.id')->select('stories.*', 'users.username')->get();
         return new StoryCollection($story);
     }
 
@@ -100,6 +100,6 @@ class StoryController extends Controller
      */
     public function destroy(Story $story)
     {
-        Story::destroy($story);
+        Story::destroy($story->id);
     }
 }

@@ -7,7 +7,7 @@
                         <div class="col-12 col-sm-2 text-start text-sm-end">
                             <label>
                                 <span class="text-danger me-1">*</span>
-                                <span>Tên Tác Giả: </span>
+                                <span>Tên Truyện: </span>
                             </label>
                         </div>
                         <div class="col-12 col-sm-10">
@@ -39,11 +39,11 @@
                         <div class="col-12 col-sm-2 text-start text-sm-end">
                             <label>
                                 <span class="text-danger me-1">*</span>
-                                <span>Tên Tác Giả: </span>
+                                <span>Giới Thiệu Truyện: </span>
                             </label>
                         </div>
                         <div class="col-12 col-sm-10">
-                            <a-input placeholder="Giới Thiệu Truyện" allow-clear v-model:value="describe"
+                            <a-textarea placeholder="Giới Thiệu Truyện" allow-clear autosize v-model:value="describe"
                             :class="{ 'select-danger': errors.describe }"/>
                             <div class="w-100"></div>
                             <small v-if="errors.describe" class="text-danger">{{ errors.describe[0] }}</small>
@@ -55,7 +55,7 @@
                         <div class="col-12 col-sm-2 text-start text-sm-end">
                             <label>
                                 <span class="text-danger me-1">*</span>
-                                <span>Tên Tác Giả: </span>
+                                <span>Nguồn Truyện: </span>
                             </label>
                         </div>
                         <div class="col-12 col-sm-10">
@@ -127,7 +127,7 @@ export default defineComponent({
         getStoryEdit();
 
         const editStory = () => {
-            axios.put('http://localhost:8000/api/role/' + route.params.id, stories)
+            axios.put('http://localhost:8000/api/story/' + route.params.id, stories)
                 .then((response) => {
                     if (response) {
                         message.success("Cập Nhật Tác Giả Thành Công");

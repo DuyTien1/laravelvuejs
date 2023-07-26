@@ -77,8 +77,8 @@ export default defineComponent({
             },
             {
                 title: 'Tên Người Đăng',
-                dataIndex: 'poster_name',
-                key: 'poster_name',
+                dataIndex: 'username',
+                key: 'username',
                 width: 200,
                 align: 'center',
             },
